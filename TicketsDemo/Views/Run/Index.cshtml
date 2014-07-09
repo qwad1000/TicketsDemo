@@ -1,0 +1,22 @@
+﻿@model TicketsDemo.Models.RunViewModel
+
+@{
+    ViewBag.Title = "Run details";
+}
+
+<h2>Train @Model.Run.Train.Number (@Model.Run.Train.StartLocation - @Model.Run.Train.EndLocation)</h2>
+<h4>Run starts at @Model.Run.Date.ToShortDateString()</h4>
+
+<h2>Available Places</h2>
+
+@foreach (var place in Model.Run.Places)
+{
+    if (Model.ReservedPlaces.Contains(place.Id))
+    {
+        @place.Place.Number;
+    }else{
+        <a href="@Url.Action("ReservePlace",new{placeId=place.Id,runId=Model.Run.Id})">@place.Place.Number</a>
+    }
+}
+
+

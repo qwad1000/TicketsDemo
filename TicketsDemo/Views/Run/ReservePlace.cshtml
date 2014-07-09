@@ -1,0 +1,35 @@
+﻿@model TicketsDemo.Models.ReservationViewModel
+
+@{
+    ViewBag.Title = "Run details";
+}
+
+<h2>Train @Model.Reservation.PlaceInRun.Run.Train.Number (@Model.Reservation.PlaceInRun.Run.Train.StartLocation - @Model.Reservation.PlaceInRun.Run.Train.EndLocation)</h2>
+<h4>Run starts at @Model.Reservation.PlaceInRun.Run.Date.ToShortDateString()</h4>
+
+<h2>the place @Model.Reservation.PlaceInRun.Place.Number is reserved for you for</h2>
+
+<h4>Price:</h4>
+@foreach (var pc in Model.PriceComponents) { 
+    <span>@pc.Name:@pc.Value$</span><br />
+}
+
+@using (Html.BeginForm("CreateTicket","Run"))
+{ 
+    <input type="hidden" value="@Model.Reservation.Id" name="ReservationId" id="ReserevationId"/>
+    <table>
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" name="FirstName" id="FirstName" /></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" name="LastName" id="LastName" /></td>
+        </tr>
+    </table>
+    <input type="submit" value="submit"/>
+}
+
+<!--public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int ReservationId { get; set; }-->

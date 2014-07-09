@@ -1,0 +1,30 @@
+﻿@model TicketsDemo.Models.TrainDetailsViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Train @Model.Train.Number (@Model.Train.StartLocation - @Model.Train.EndLocation)</h2>
+@foreach (var carriage in Model.Train.Carriages) { 
+   <h4>@carriage.Type.ToString()</h4>
+    foreach (var place in carriage.Places) { 
+        @place.Number<text>,</text>
+    }
+}
+
+<h2>Schedule between the @Model.ScheduleStart.ToShortDateString() and @Model.ScheduleEnd.ToShortDateString()</h2>
+
+@foreach (var run in Model.Runs.OrderBy(m => m.Date)) { 
+    <a href="@Url.Action("Index","Run",new {id = run.Id})">@run.Date.ToShortDateString(),train:@Model.Train.Number</a> <br />
+}
+
+<h2>Create new Run</h2>
+@foreach (var date in Model.AvailableDates) { 
+    <a href="@Url.Action("CreateRun",new {trainId = Model.Train.Id,date=date})">at @date.ToShortDateString()</a>
+}
+
+
+
+
+
+

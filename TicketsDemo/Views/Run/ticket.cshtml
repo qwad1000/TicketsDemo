@@ -1,0 +1,19 @@
+﻿@model TicketsDemo.Data.Entities.Ticket
+
+@{
+    ViewBag.Title = "Ticket details";
+}
+
+<h2>Train @Model.Reservation.PlaceInRun.Run.Train.Number (@Model.Reservation.PlaceInRun.Run.Train.StartLocation - @Model.Reservation.PlaceInRun.Run.Train.EndLocation)</h2>
+<h4>Run starts at @Model.Reservation.PlaceInRun.Run.Date.ToShortDateString()</h4>
+
+<h2>ticket is for place @Model.Reservation.PlaceInRun.Place.Number</h2>
+
+<h4>Price:</h4>
+@foreach (var pc in Model.PriceComponents) { 
+    <span>@pc.Name:@pc.Value$</span><br />
+}
+
+<!--public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int ReservationId { get; set; }-->

@@ -1,0 +1,4 @@
+Type;Places;Price;
+Sedentary;80;10;
+Sedentary;80;10;
+Sedentary;80;10;

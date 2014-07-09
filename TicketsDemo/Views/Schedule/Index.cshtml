@@ -1,0 +1,20 @@
+﻿@model TicketsDemo.Models.IndexPageViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Available Trains</h2>
+@foreach (var train in Model.Trains) { 
+    <a href="@Url.Action("Train",new {id = train.Value.Id})">@train.Value.Number (@train.Value.StartLocation - @train.Value.EndLocation)</a><br />
+}
+
+<h2>Display train runs schedule between @Model.ScheduleStart.ToShortDateString() and @Model.ScheduleEnd.ToShortDateString()</h2>
+
+@foreach (var run in Model.Runs.OrderBy(m => m.Date)) { 
+    <a href="@Url.Action("Index","Run",new {id = run.Id})">@run.Date.ToShortDateString(),train:@Model.Trains[run.TrainId].Number</a> <br />
+}
+
+
+
+

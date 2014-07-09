@@ -1,0 +1,6 @@
+Type;Places;Price;
+Sedentary;80;40;
+Sedentary;80;44;
+Sedentary;80;44;
+FirstClassSleeping;40;74;
+FirstClassSleeping;40;84;
