@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultImplementations\Logger.cs" />
+    <Compile Include="DefaultImplementations\FileLogger.cs" />
     <Compile Include="DefaultImplementations\PriceCalculationStrategy\NewPriceCalculationStrategy.cs" />
     <Compile Include="DefaultImplementations\PriceCalculationStrategy\DefaultPriceCalculationStrategy.cs" />
     <Compile Include="DefaultImplementations\ReservationService.cs" />

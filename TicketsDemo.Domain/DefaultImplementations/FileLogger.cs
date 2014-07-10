@@ -19,9 +19,9 @@ namespace TicketsDemo.Domain.DefaultImplementations
 
         public void Log(string message, LogSeverity severity)
         {
-            using (var fileStreamWriter = new StreamWriter(Path.Combine(_dataFolder, "log.txt")))
+            using (var fileStreamWriter = new StreamWriter(Path.Combine(_dataFolder, "log.txt"), true))
             {
-                var wrtStr = String.Format("{0}[{1}]: {3}", severity, DateTime.Now, message);
+                var wrtStr = String.Format("{0}[{1}]: {2}", severity, DateTime.Now, message);
                 fileStreamWriter.WriteLine(wrtStr);
             }
             //throw new NotImplementedException();

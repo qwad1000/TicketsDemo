@@ -85,7 +85,9 @@ namespace TicketsDemo.App_Start
             kernel.Bind<ICSVReader>().To<CSVReader>();
 
             //binding my own logger
-            kernel.Bind<ILogger>().To<FileLogger>();
+            //kernel.Bind<ILogger>().To<FileLogger>();
+            kernel.Bind<ILogger>().ToMethod(x =>
+                new FileLogger(HttpContext.Current.Server.MapPath("~/App_Data")));
         }        
     }
 }
