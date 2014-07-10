@@ -14,11 +14,15 @@ namespace TicketsDemo.Domain.DefaultImplementations
         private ITicketRepository _tickRepo;
         private IPriceCalculationStrategy _priceStr;
         private IReservationRepository _resRepo;
+        private ILogger _logger;
 
-        public TicketService(ITicketRepository tickRepo,IReservationRepository resRepo, IPriceCalculationStrategy priceCalculationStrategy) { 
+        public TicketService(ITicketRepository tickRepo, IReservationRepository resRepo,
+            IPriceCalculationStrategy priceCalculationStrategy, ILogger logger)
+        {
             _tickRepo = tickRepo;
             _resRepo = resRepo;
             _priceStr = priceCalculationStrategy;
+            _logger = logger;
         }
 
         public Ticket CreateTicket(int reservationId ,string fName,string lName)
@@ -39,16 +43,21 @@ namespace TicketsDemo.Domain.DefaultImplementations
             newTicket.PriceComponents = _priceStr.CalculatePrice(res);
 
             _tickRepo.Create(newTicket);
+            _logger.Log(String.Format("ticket {0} created",newTicket), LogSeverity.Info);
             return newTicket;
         }
 
         public void SellTicket(Ticket ticket)
         {
             if (ticket.Status == TicketStatusEnum.Sold)
+            {
+                _logger.Log(String.Format("ticket {0} is already sold",ticket), LogSeverity.Info);
                 throw new ArgumentException("ticket is already sold");
+            }
 
             ticket.Status = TicketStatusEnum.Sold;
             _tickRepo.Update(ticket);
+            _logger.Log(String.Format("ticket {0} sold", ticket), LogSeverity.Info);
         }
     }
 }

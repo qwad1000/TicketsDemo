@@ -12,11 +12,12 @@ namespace TicketsDemo.Domain.DefaultImplementations
     public class ReservationService : IReservationService
     {
         IReservationRepository _resRepo;
+        private ILogger _logger;
 
-
-        public ReservationService(IReservationRepository resRepo)
+        public ReservationService(IReservationRepository resRepo, ILogger logger)
         {
             _resRepo = resRepo;
+            _logger = logger;
         }
 
 
@@ -34,6 +35,7 @@ namespace TicketsDemo.Domain.DefaultImplementations
             };
 
             _resRepo.Create(createIt);
+            _logger.Log(String.Format("reservation {0} created", createIt), LogSeverity.Info);
 
             return createIt;
         }
@@ -42,6 +44,7 @@ namespace TicketsDemo.Domain.DefaultImplementations
         {
             reservation.End = DateTime.Now;
             _resRepo.Update(reservation);
+            //_logger.Log(String.Format("reservation {0} removed", reservation), LogSeverity.Info);
         }
 
         public bool PlaceIsOccupied(PlaceInRun place)
