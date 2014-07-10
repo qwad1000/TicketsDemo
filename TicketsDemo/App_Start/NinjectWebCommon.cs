@@ -59,7 +59,7 @@ namespace TicketsDemo.App_Start
                 throw;
             }
         }
-
+        
         /// <summary>
         /// Load your modules or register your services here!
         /// </summary>
@@ -83,6 +83,9 @@ namespace TicketsDemo.App_Start
             kernel.Bind<IPriceCalculationStrategy>().To<DefaultPriceCalculationStrategy>();
 
             kernel.Bind<ICSVReader>().To<CSVReader>();
+
+            //binding my own logger
+            kernel.Bind<ILogger>().To<FileLogger>();
         }        
     }
 }
